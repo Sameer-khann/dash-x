@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { IoSwapVertical } from "react-icons/io5";
-import Image from 'next/image'
-
+import Image from "next/image";
 
 const tokenOptions = [
   {
@@ -35,8 +34,6 @@ const BlockchainSwapCard = () => {
   setTimeout(() => {
     setLoading(false);
   }, 3000); // 3 seconds delay to simulate loading
-
-  
 
   const [selectedTab, setSelectedTab] = useState("swap");
   const [recipient, setRecipient] = useState("");
@@ -265,17 +262,20 @@ const BlockchainSwapCard = () => {
         <Skeleton />
       ) : (
         <div
-          className="page flex justify-center items-center h-screen"
+          className="page flex justify-center items-center min-h-screen"
           style={{
             backgroundImage: `url('/Images/bg-dashx.jpg')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            
           }}
         >
-          <div className="main flex justify-center items-center w-full h-3/4">
-            <div className="bigCard w-2/5">
+          <div className="main flex justify-center items-center w-full h-full lg:h-3/4">
+            <div className="bigCard w-full sm:w-3/4 md:w-2/3 lg:w-2/5 p-4">
               {/* Tab Selection */}
-              <div className="stateCard bg-gray-400 h-auto m-2 rounded-xl flex items-center justify-center gap-2">
+              <div className="stateCard bg-gray-400 h-auto mb-4 border rounded-xl flex items-center justify-center gap-2 ">
                 <div
-                  className={`flex justify-center h-8 items-center w-1/3 rounded-xl text-black cursor-pointer ${
+                  className={`flex justify-center h-10 items-center w-1/3 rounded-xl text-black cursor-pointer ${
                     selectedTab === "swap"
                       ? "bg-white text-black"
                       : "text-gray-700"
@@ -285,7 +285,7 @@ const BlockchainSwapCard = () => {
                   Swap
                 </div>
                 <div
-                  className={`flex justify-center h-8 items-center w-1/3 rounded-xl cursor-pointer ${
+                  className={`flex justify-center h-10 items-center w-1/3 rounded-xl cursor-pointer ${
                     selectedTab === "buy"
                       ? "bg-white text-black"
                       : "text-gray-700"
@@ -295,7 +295,7 @@ const BlockchainSwapCard = () => {
                   Buy
                 </div>
                 <div
-                  className={`flex justify-center h-8 items-center w-1/3 rounded-xl cursor-pointer ${
+                  className={`flex justify-center h-10 items-center w-1/3 rounded-xl cursor-pointer ${
                     selectedTab === "sell"
                       ? "bg-white text-black"
                       : "text-gray-700"
@@ -307,12 +307,12 @@ const BlockchainSwapCard = () => {
               </div>
 
               {/* Card Content */}
-              <div className="card bg-white h-auto rounded-xl m-2 p-2">
-                <div className="innerCard m-2 bg-white rounded-xl">
+              <div className="card bg-white h-auto rounded-xl mb-4 p-4 shadow-md border">
+                <div className="innerCard  rounded-xl p-4 shadow-sm">
                   {selectedTab === "swap" && (
                     <div>
                       {/* Swap Card */}
-                      <div className="firstCoin bg-indigo-100 rounded-xl p-2 gap-8 ">
+                      {/* <div className="firstCoin bg-indigo-100 rounded-xl p-2 gap-8 ">
                         <div className="firstCoinOne text-black p-0 text-sm relative bg-white rounded-[10px]">
                           <div
                             className="border border-gray-300 rounded-lg h-8 flex items-center justify-between px-2 cursor-pointer"
@@ -443,6 +443,149 @@ const BlockchainSwapCard = () => {
 
                         <div className="firstCoinThree flex justify-between items-center px-2 text-gray-600">
                           <div>
+                            {isNaN(parseFloat(amount)) || amount === ""
+                              ? "0.00"
+                              : convertAmountToValue(amount)}
+                          </div>
+                          <div>Balance: 0</div>
+                        </div>
+                      </div> */}
+
+                      <div className="firstCoin bg-indigo-100 rounded-xl p-2 gap-4 md:gap-8">
+                        {/* First Dropdown */}
+                        <div className="firstCoinOne text-black p-0 text-sm relative bg-white rounded-[10px]">
+                          <div
+                            className="border border-gray-300 rounded-lg h-8 flex items-center justify-between px-2 cursor-pointer"
+                            onClick={() => setIsOpen(!isOpen)}
+                          >
+                            {selectedToken ? (
+                              <div className="flex items-center">
+                                <img
+                                  src={selectedToken.image}
+                                  alt={selectedToken.label}
+                                  className="w-5 h-5 mr-2"
+                                />
+                                <span>{selectedToken.label}</span>
+                              </div>
+                            ) : (
+                              <span>Select Coin</span>
+                            )}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className={`w-4 h-4 transition-transform ${
+                                isOpen ? "rotate-180" : ""
+                              }`}
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </div>
+                          {isOpen && (
+                            <div className="absolute z-10 bg-white border border-gray-300 rounded-lg mt-1 w-full max-w-xs sm:max-w-sm">
+                              {tokenOptions.map((option) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center px-2 py-2 cursor-pointer hover:bg-gray-100"
+                                  onClick={() => handleSelect(option)}
+                                >
+                                  <img
+                                    src={option.image}
+                                    alt={option.label}
+                                    className="w-5 h-5 mr-2"
+                                  />
+                                  {option.label}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Input and Second Dropdown */}
+                        <div className="firstCoinSecond flex flex-wrap md:flex-nowrap justify-between items-center gap-2 md:gap-4 m-1 text-black">
+                          <div className="relative w-full md:w-2/3 text-sm h-8">
+                            <input
+                              type="text"
+                              placeholder="Enter Amount"
+                              className="w-full rounded-lg h-8 text-black px-3"
+                              value={amount}
+                              onChange={(e) => setAmount(e.target.value)}
+                            />
+                            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-700 mx-1 text-sm">
+                              Max
+                            </div>
+                          </div>
+
+                          {/* Second Dropdown */}
+                          <div className="relative w-full text-sm md:w-auto">
+                            <div
+                              className="flex items-center justify-between border border-gray-300 rounded-lg px-3 py-2 cursor-pointer bg-white w-full md:w-auto h-8"
+                              onClick={() => setDropdownOpen(!dropdownOpen)}
+                            >
+                              {selectedCoin ? (
+                                <>
+                                  <img
+                                    src={selectedCoin.image}
+                                    alt={selectedCoin.label}
+                                    className="w-5 h-5 mr-2"
+                                  />
+                                  <span>{selectedCoin.label}</span>
+                                </>
+                              ) : (
+                                <span className="text-gray-500 ">
+                                  Select Token
+                                </span>
+                              )}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className={`w-4 h-4 transition-transform ${
+                                  dropdownOpen ? "rotate-180" : ""
+                                }`}
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M19 9l-7 7-7-7"
+                                />
+                              </svg>
+                            </div>
+
+                            {/* Dropdown Options */}
+                            {dropdownOpen && (
+                              <div className="absolute top-full mt-1 border border-gray-300 rounded-lg bg-white shadow-lg w-full sm:w-60 z-10">
+                                {tokenOptions.map((coin) => (
+                                  <div
+                                    key={coin.value}
+                                    className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100"
+                                    onClick={() => handleCoinSelect(coin)}
+                                  >
+                                    <img
+                                      src={coin.image}
+                                      alt={coin.label}
+                                      className="w-5 h-5 mr-2"
+                                    />
+                                    <span>{coin.label}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Amount Display and Balance */}
+                        <div className="firstCoinThree flex flex-wrap justify-between items-center px-2 text-gray-600">
+                          <div>
+                            $
                             {isNaN(parseFloat(amount)) || amount === ""
                               ? "0.00"
                               : convertAmountToValue(amount)}
