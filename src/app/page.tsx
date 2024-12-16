@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import dynamic from "next/dynamic";
 import { IoSwapVertical } from "react-icons/io5";
-import ContentLoader from "react-content-loader";
-import { List } from "react-content-loader";
 
 const tokenOptions = [
   {
@@ -37,12 +34,11 @@ const BlockchainSwapCard = () => {
     setLoading(false);
   }, 3000); // 3 seconds delay to simulate loading
 
-  var isCoinOne = false;
-  var isCoinSecond = false;
+  
 
   const [selectedTab, setSelectedTab] = useState("swap");
   const [recipient, setRecipient] = useState("");
-  const [hover, setHover] = useState(false);
+  // const [hover, setHover] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedToken, setSelectedToken] = useState<{
@@ -71,7 +67,6 @@ const BlockchainSwapCard = () => {
   };
 
   const convertAmountToValue = (amount: string): string => {
-    isCoinOne = true;
     const conversionRate = 1; // Example conversion rate
     const value = parseFloat(amount) * conversionRate;
     return isNaN(value) ? "0.00" : value.toFixed(2);
@@ -105,7 +100,6 @@ const BlockchainSwapCard = () => {
   };
 
   const convertAmountToValueSecond = (amountSecond: string): string => {
-    isCoinSecond = true;
     const conversionRate = 1; // Example conversion rate
     const value = parseFloat(amountSecond) * conversionRate;
     return isNaN(value) ? "0.00" : value.toFixed(2);
@@ -385,10 +379,9 @@ const BlockchainSwapCard = () => {
                             </div>
                           </div>
 
-                          {/* Second Dropdown */}
 
                           <div className="flex justify-center gap-1 my-1 text-sm relative">
-                            {/* Selected Coin Display */}
+                            
                             <div
                               className="flex items-center justify-between border border-gray-300 rounded-lg px-3 py-2 cursor-pointer bg-white w-35 h-8"
                               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -407,7 +400,6 @@ const BlockchainSwapCard = () => {
                                   Select Token
                                 </span>
                               )}
-                              {/* <span className="ml-auto">\u25BC</span> */}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className={`w-4 h-4 transition-transform ${
@@ -426,7 +418,6 @@ const BlockchainSwapCard = () => {
                               </svg>
                             </div>
 
-                            {/* Dropdown Options */}
                             {dropdownOpen && (
                               <div className="absolute top-full mt-1 border border-gray-300 rounded-lg bg-white shadow-lg w-60 z-10">
                                 {tokenOptions.map((coin) => (
@@ -450,7 +441,6 @@ const BlockchainSwapCard = () => {
 
                         <div className="firstCoinThree flex justify-between items-center px-2 text-gray-600">
                           <div>
-                            {/* Ensure valid number conversion or fallback */}$
                             {isNaN(parseFloat(amount)) || amount === ""
                               ? "0.00"
                               : convertAmountToValue(amount)}
