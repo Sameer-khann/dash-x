@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { IoSwapVertical } from "react-icons/io5";
+import Image from 'next/image'
+
 
 const tokenOptions = [
   {
@@ -166,7 +168,7 @@ const BlockchainSwapCard = () => {
             <div className="border border-gray-300 rounded-lg h-8 flex items-center bg-white justify-between px-2 cursor-pointer">
               <div className="flex justify-center">
                 <div className="w-7 h-5 bg-gray-300 rounded-full mr-2" />{" "}
-                {/* Placeholder for token image */}
+                {/* Placeholder for token Image */}
                 <div className="w-24 h-5 bg-gray-300 rounded" />{" "}
                 {/* Placeholder for token label */}
               </div>
@@ -190,7 +192,7 @@ const BlockchainSwapCard = () => {
             <div className=" z-10 bg-white border border-gray-300 rounded-lg mt-1 w-80">
               <div className="flex items-center px-2 py-2 cursor-pointer hover:bg-gray-100">
                 <div className="w-5 h-5 bg-gray-300 rounded-full mr-2" />{" "}
-                {/* Placeholder for token image */}
+                {/* Placeholder for token Image */}
                 <div className="w-24 h-5 bg-gray-300 rounded" />{" "}
                 {/* Placeholder for token label */}
               </div>
@@ -211,7 +213,7 @@ const BlockchainSwapCard = () => {
             <div className="border border-gray-300 rounded-lg h-8 flex items-center bg-white justify-between px-2 cursor-pointer">
               <div className="flex justify-center">
                 <div className="w-5 h-5 bg-gray-300 rounded-full mr-2" />{" "}
-                {/* Placeholder for token image */}
+                {/* Placeholder for token Image */}
                 <div className="w-24 h-5 bg-gray-300 rounded" />{" "}
                 {/* Placeholder for token label */}
               </div>
@@ -235,7 +237,7 @@ const BlockchainSwapCard = () => {
             <div className=" z-10 bg-white border border-gray-300 rounded-lg mt-1 w-80">
               <div className="flex items-center px-2 py-2 cursor-pointer hover:bg-gray-100">
                 <div className="w-5 h-5 bg-gray-300 rounded-full mr-2" />{" "}
-                {/* Placeholder for token image */}
+                {/* Placeholder for token Image */}
                 <div className="w-24 h-5 bg-gray-300 rounded" />{" "}
                 {/* Placeholder for token label */}
               </div>
@@ -265,7 +267,7 @@ const BlockchainSwapCard = () => {
         <div
           className="page flex justify-center items-center h-screen"
           style={{
-            backgroundImage: `url('/images/bg-dashx.jpg')`,
+            backgroundImage: `url('/Images/bg-dashx.jpg')`,
           }}
         >
           <div className="main flex justify-center items-center w-full h-3/4">
@@ -318,7 +320,7 @@ const BlockchainSwapCard = () => {
                           >
                             {selectedToken ? (
                               <div className="flex items-center">
-                                <img
+                                <Image
                                   src={selectedToken.image}
                                   alt={selectedToken.label}
                                   className="w-5 h-5 mr-2"
@@ -353,7 +355,7 @@ const BlockchainSwapCard = () => {
                                   className="flex items-center px-2 py-2 cursor-pointer hover:bg-gray-100"
                                   onClick={() => handleSelect(option)}
                                 >
-                                  <img
+                                  <Image
                                     src={option.image}
                                     alt={option.label}
                                     className="w-5 h-5 mr-2"
@@ -388,7 +390,7 @@ const BlockchainSwapCard = () => {
                             >
                               {selectedCoin ? (
                                 <>
-                                  <img
+                                  <Image
                                     src={selectedCoin.image}
                                     alt={selectedCoin.label}
                                     className="w-5 h-5 mr-2"
@@ -426,7 +428,7 @@ const BlockchainSwapCard = () => {
                                     className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100"
                                     onClick={() => handleCoinSelect(coin)}
                                   >
-                                    <img
+                                    <Image
                                       src={coin.image}
                                       alt={coin.label}
                                       className="w-5 h-5 mr-2"
@@ -469,7 +471,7 @@ const BlockchainSwapCard = () => {
                           >
                             {selectedTokenSecond ? (
                               <div className="flex items-center">
-                                <img
+                                <Image
                                   src={selectedTokenSecond.image}
                                   alt={selectedTokenSecond.label}
                                   className="w-5 h-5 mr-2"
@@ -504,7 +506,7 @@ const BlockchainSwapCard = () => {
                                   className="flex items-center px-2 py-2 cursor-pointer hover:bg-gray-100"
                                   onClick={() => handleSelectSecond(option)}
                                 >
-                                  <img
+                                  <Image
                                     src={option.image}
                                     alt={option.label}
                                     className="w-5 h-5 mr-2"
@@ -539,7 +541,7 @@ const BlockchainSwapCard = () => {
                             >
                               {selectedCoinSecond ? (
                                 <>
-                                  <img
+                                  <Image
                                     src={selectedCoinSecond.image}
                                     alt={selectedCoinSecond.label}
                                     className="w-5 h-5 mr-2"
@@ -577,7 +579,7 @@ const BlockchainSwapCard = () => {
                                     className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100"
                                     onClick={() => handleCoinSelectSecond(coin)}
                                   >
-                                    <img
+                                    <Image
                                       src={coin.image}
                                       alt={coin.label}
                                       className="w-5 h-5 mr-2"
@@ -611,9 +613,7 @@ const BlockchainSwapCard = () => {
                       />
 
                       <button
-                        className={`${
-                          hover ? "bg-blue-100" : "bg-indigo-600"
-                        } rounded-lg w-full h-8 box-border text-white cursor-pointer disabled:bg-blue-400 disabled:cursor-not-allowed`}
+                        className="bg-indigo-600 rounded-lg w-full h-8 box-border text-white cursor-pointer disabled:bg-blue-400 disabled:cursor-not-allowed"
                         onClick={handleSwap}
                         disabled={!isSwapEnabled}
                       >
